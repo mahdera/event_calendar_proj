@@ -15,12 +15,24 @@
             $this->setReadOnly($readOnly)
         }
 
-        public function setStartTime(){
-
+        public function setStartTime($startTime){
+            $this->startTime = $startTime;
         }
 
         public function setEndTime(){
-          
+
+        }
+
+        public function setTitle(){
+
+        }
+
+        public function setEventDescription(){
+
+        }
+
+        public function setReadOnly(){
+
         }
 
     }//end class

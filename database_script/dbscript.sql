@@ -13,7 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_event_calendar`
 --
-
+create database db_event_calendar;
+use db_event_calendar;
 -- --------------------------------------------------------
 
 --
