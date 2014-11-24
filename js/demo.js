@@ -58,11 +58,24 @@ $(document).ready(function() {
                   calEvent.readOnly = false;
                   //here is where the save to database record comes in...
                   //now do call the ajax function to save these values to the database...
-                  
-
-                  $calendar.weekCalendar("removeUnsavedEvents");
-                  $calendar.weekCalendar("updateEvent", calEvent);
-                  $dialogContent.dialog("close");
+                  var dataString = "start="+encodeURIComponent(calEvent.start)+
+                  "&end="+encodeURIComponent(calEvent.end)+"&title="+
+                  encodeURIComponent(calEvent.title)+"&body="+
+                  encodeURIComponent(calEvent.body)+"&readOnly="+
+                  encodeURIComponent(calEvent.readOnly);
+                  $.ajax({
+                      url: '../saveeventcalendar.php',
+                      data: dataString,
+                      type:'POST',
+                      success:function(response){
+                          $calendar.weekCalendar("removeUnsavedEvents");
+                          $calendar.weekCalendar("updateEvent", calEvent);
+                          $dialogContent.dialog("close");
+                      },
+                      error:function(error){
+                          alert(error);
+                      }
+                  });
                },
                cancel : function() {
                   $dialogContent.dialog("close");
