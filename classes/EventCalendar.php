@@ -19,7 +19,9 @@
 
         }
 
-        public 
+        public function setEndTime(){
+          
+        }
 
     }//end class
 ?>
