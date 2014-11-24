@@ -63,11 +63,13 @@ $(document).ready(function() {
                   encodeURIComponent(calEvent.title)+"&body="+
                   encodeURIComponent(calEvent.body)+"&readOnly="+
                   encodeURIComponent(calEvent.readOnly);
+                  
                   $.ajax({
-                      url: '../saveeventcalendar.php',
+                      url: 'saveeventcalendar.php',
                       data: dataString,
                       type:'POST',
                       success:function(response){
+                          alert(response);
                           $calendar.weekCalendar("removeUnsavedEvents");
                           $calendar.weekCalendar("updateEvent", calEvent);
                           $dialogContent.dialog("close");

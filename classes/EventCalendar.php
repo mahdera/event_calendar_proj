@@ -1,6 +1,4 @@
 <?php
-    require_once 'dbconnection.php';
-
     class EventCalendar{
         private $id;
         private $startTime;
@@ -14,7 +12,7 @@
             $this->setEndTime($endTime);
             $this->setTitle($title);
             $this->setEventDescription($eventDescription);
-            $this->setReadOnly($readOnly)
+            $this->setReadOnly($readOnly);
         }
 
         public function setStartTime($startTime){
@@ -40,6 +38,7 @@
         public function save($eventCalendarObj){
             try{
                 $query = "insert into tbl_event_calendar values(0, '$this->startTime', '$this->endTime', '$this->title', '$this->eventDescription', $this->readOnly)";
+                echo $query;
                 saveToDb($query);
             }catch(Exception $ex){
                 $ex->getMessage();
