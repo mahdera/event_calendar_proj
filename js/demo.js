@@ -55,7 +55,10 @@ $(document).ready(function() {
                   calEvent.end = new Date(endField.val());
                   calEvent.title = titleField.val();
                   calEvent.body = bodyField.val();
+                  calEvent.readOnly = false;
                   //here is where the save to database record comes in...
+                  //now do call the ajax function to save these values to the database...
+                  
 
                   $calendar.weekCalendar("removeUnsavedEvents");
                   $calendar.weekCalendar("updateEvent", calEvent);
