@@ -58,8 +58,8 @@ $(document).ready(function() {
                   calEvent.readOnly = false;
                   //here is where the save to database record comes in...
                   //now do call the ajax function to save these values to the database...
-                  var dataString = "start="+encodeURIComponent(calEvent.start)+
-                  "&end="+encodeURIComponent(calEvent.end)+"&title="+
+                  var dataString = "start="+encodeURIComponent((calEvent.start).toISOString().slice(0, 19).replace('T', ' '))+
+                  "&end="+encodeURIComponent(calEvent.end.toISOString().slice(0, 19).replace('T', ' '))+"&title="+
                   encodeURIComponent(calEvent.title)+"&body="+
                   encodeURIComponent(calEvent.body)+"&readOnly="+
                   encodeURIComponent(calEvent.readOnly);
@@ -69,7 +69,7 @@ $(document).ready(function() {
                       data: dataString,
                       type:'POST',
                       success:function(response){
-                          alert(response);
+                          //alert(response);
                           $calendar.weekCalendar("removeUnsavedEvents");
                           $calendar.weekCalendar("updateEvent", calEvent);
                           $dialogContent.dialog("close");
@@ -162,28 +162,23 @@ $(document).ready(function() {
 
    function getEventData() {
       //this is where i need to read from the database and return a JSON
-      var year = new Date().getFullYear();
+      /*var year = new Date().getFullYear();
       var month = new Date().getMonth();
-      var day = new Date().getDate();
+      var day = new Date().getDate();*/
 
-      $.ajax({
-        url: 'getalleventdata.php',
-        data: null,
-        type:'GET',
-        success:function(response){
-          alert(response);
-          //$calendar.weekCalendar("removeUnsavedEvents");
-          //$calendar.weekCalendar("updateEvent", calEvent);
-          //$dialogContent.dialog("close");
-          return response;
-        },
-        error:function(error){
-          alert(error);
-        }
+      $.getJSON( "getalleventdata.php", function( data ) {
+          console.log('executed');
+      }).done(function( data ) {
+          alert(data);
+          console.log( "JSON Data: " + data.events[ 0 ].title );
+      }).fail(function( jqxhr, textStatus, error ) {
+          var err = textStatus + ", " + error;
+          console.log( "Request Failed: " + err );
       });
 
+
       /*return {
-         events : [
+         "events" : [
             {
                "id":1,
                "start": new Date(year, month, day, 12),
@@ -224,7 +219,7 @@ $(document).ready(function() {
 
          ]
       };*/
-   }
+   }//end function getEventData()
 
 
    /*
