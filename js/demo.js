@@ -63,7 +63,7 @@ $(document).ready(function() {
                   encodeURIComponent(calEvent.title)+"&body="+
                   encodeURIComponent(calEvent.body)+"&readOnly="+
                   encodeURIComponent(calEvent.readOnly);
-                  
+
                   $.ajax({
                       url: 'saveeventcalendar.php',
                       data: dataString,
@@ -166,7 +166,23 @@ $(document).ready(function() {
       var month = new Date().getMonth();
       var day = new Date().getDate();
 
-      return {
+      $.ajax({
+        url: 'getalleventdata.php',
+        data: null,
+        type:'GET',
+        success:function(response){
+          alert(response);
+          //$calendar.weekCalendar("removeUnsavedEvents");
+          //$calendar.weekCalendar("updateEvent", calEvent);
+          //$dialogContent.dialog("close");
+          return response;
+        },
+        error:function(error){
+          alert(error);
+        }
+      });
+
+      /*return {
          events : [
             {
                "id":1,
@@ -207,7 +223,7 @@ $(document).ready(function() {
             }
 
          ]
-      };
+      };*/
    }
 
 

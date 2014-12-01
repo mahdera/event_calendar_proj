@@ -1,4 +1,4 @@
-<?php    
+<?php
     require_once 'classes/EventCalendar.php';
     $start = $_POST['start'];
     $end = $_POST['end'];

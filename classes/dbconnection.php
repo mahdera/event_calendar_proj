@@ -1,23 +1,41 @@
 <?php
-    function connect(){
-        @$connection = mysql_pconnect("localhost", "root", "root");
-        return $connection;
-    }
+/*
+* To change this template, choose Tools | Templates
+* and open the template in the editor.
+*/
+
+/**
+* Description of DBConnection
+*
+* @author Mahder
+*/
+class DBConnection {
+
+  public static function connect(){
+    $server = "localhost";
+    $username = "root";
+    $password = "root";
+    @$connection = mysql_pconnect($server, $username, $password);
+    return $connection;
+  }
 
 
-    function saveToDb($query){
-        $dbConnection = connect();
-        @mysql_select_db("db_sami_proj", $dbConnection);
-        @$result = mysql_query($query);
-        //echo $query;
-        @$rc = mysql_affected_rows();
-        return $rc;
-    }
 
-    function readFromDb($query){
-        $dbConnection = connect();
-        @mysql_select_db("db_sami_proj", $dbConnection);
-        $result = mysql_query($query);
-        return $result;
-    }
+  public static function executeQuery($query){
+    $dbConnection = DBConnection::connect();
+    @mysql_select_db("db_event_calendar", $dbConnection);
+    $result = mysql_query($query);
+    return $result;
+  }
+
+  public static function read($query){
+    $result = DBConnection::executeQuery($query);
+    return $result;
+  }
+
+  public static function save($query){
+    $result = DBConnection::executeQuery($query);
+    return;
+  }
+}//end class
 ?>
