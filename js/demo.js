@@ -58,10 +58,10 @@ $(document).ready(function() {
                   calEvent.readOnly = false;
                   //here is where the save to database record comes in...
                   //now do call the ajax function to save these values to the database...
-                  var dataString = "start="+encodeURIComponent((calEvent.start).toISOString().slice(0, 19).replace('T', ' '))+
-                  "&end="+encodeURIComponent(calEvent.end.toISOString().slice(0, 19).replace('T', ' '))+"&title="+
-                  encodeURIComponent(calEvent.title)+"&body="+
-                  encodeURIComponent(calEvent.body)+"&readOnly="+
+                  var dataString = "start=" + calEvent.start.getTime() +
+                  "&end=" + calEvent.end.getTime() + "&title=" +
+                  encodeURIComponent(calEvent.title) + "&body=" +
+                  encodeURIComponent(calEvent.body) + "&readOnly=" +
                   encodeURIComponent(calEvent.readOnly);
 
                   $.ajax({
@@ -161,29 +161,36 @@ $(document).ready(function() {
    }
 
    function getEventData() {
-       $jsonObj = null;
 
-       $.ajax({
+       jQuery.getJSON('getalleventdata.php', function(data){
+          console.log("succ");
+          jQuery.each( data, function( i, item ){
+            console.log(item.title);
+          });
+       });
+
+       return null;
+       /*$.ajax({
          url: "getalleventdata.php",
          dataType: "JSON",
          success: function(json){
-           alert(json.length);
-           //return json;
+           alert(json);
+           return json;
          }
-       });
+       });*/
 
        //return json;
-
-       /*return {
+       /*
+       return {
          "events":[
             {
               "id":1,
-              "start":"Mon Dec 01 2014 02 : 15 : 00 GMT-0500 (EST)",
-              "end":"Mon Dec 01 2014 02 : 45 : 00 GMT-0500 (EST)",
+              "start":"Tue Dec 02 2014 02 : 15 : 00 GMT-0500 (EST)",
+              "end":"Tue Dec 02 2014 02 : 45 : 00 GMT-0500 (EST)",
               "title":"This is the first event"
             }
           ]
-        };*/
+        };
 
        //return "{" + jsonObj + "}";
       // return {"events":[{"id":"1","start":"Mon Dec 01 2014 02 : 15 : 00 GMT-0500 (EST)","end":"Mon Dec 01 2014 02 : 45 : 00 GMT-0500 (EST)","title":"This is the first event"}]};
@@ -192,9 +199,10 @@ $(document).ready(function() {
 
       //this is where i need to read from the database and return a JSON
 
-      /*var year = new Date().getFullYear();
+      */
+      var year = new Date().getFullYear();
       var month = new Date().getMonth();
-      var day = new Date().getDate();*/
+      var day = new Date().getDate();
 
       //var
 
@@ -214,8 +222,8 @@ $(document).ready(function() {
         }
       });*/
 
-      /*
-      return {
+
+      /*return {
          "events" : [
             {
                "id":1,
@@ -256,8 +264,8 @@ $(document).ready(function() {
             }
 
          ]
-      };
-      */
+      };*/
+
    }//end function getEventData()
 
 

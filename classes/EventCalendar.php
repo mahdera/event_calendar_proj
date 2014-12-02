@@ -38,7 +38,7 @@
 
         public function save(){
             try{
-                $query = "insert into tbl_event_calendar values(0, '$this->startTime', '$this->endTime', '$this->title', '$this->eventDescription', $this->readOnly)";
+                $query = "insert into tbl_event_calendar values(0, $this->startTime, $this->endTime, '$this->title', '$this->eventDescription', $this->readOnly)";
                 DBConnection::save($query);
             }catch(Exception $ex){
                 $ex->getMessage();

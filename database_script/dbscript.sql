@@ -13,6 +13,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_event_calendar`
 --
+drop database if exists db_event_calendar;
 create database db_event_calendar;
 use db_event_calendar;
 -- --------------------------------------------------------
@@ -23,8 +24,8 @@ use db_event_calendar;
 
 CREATE TABLE `tbl_event_calendar` (
 `id` bigint(20) NOT NULL,
-  `start_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
+  `start_time` bigint NOT NULL,
+  `end_time` bigint NOT NULL,
   `title` varchar(255) NOT NULL,
   `event_description` text NOT NULL,
   `read_only` tinyint(1) DEFAULT '0'
