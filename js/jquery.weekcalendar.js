@@ -464,6 +464,7 @@
 
          //load events by chosen means
          if (typeof options.data == 'string') {
+           //alert('got here');
             if (options.loading) options.loading(true);
             var jsonOptions = {};
             jsonOptions[options.startParam || 'start'] = Math.round(weekStartDate.getTime() / 1000);
@@ -1072,7 +1073,7 @@
            var millisToSubtract = self._getAdjustedDayIndex(midnightCurrentDate) * 86400000;
            return new Date(midnightCurrentDate.getTime() - millisToSubtract);
          }else{
-            return null;  
+            return null;
          }
       },
 

@@ -161,23 +161,61 @@ $(document).ready(function() {
    }
 
    function getEventData() {
+       $jsonObj = null;
+
+       $.ajax({
+         url: "getalleventdata.php",
+         dataType: "JSON",
+         success: function(json){
+           alert(json.length);
+           //return json;
+         }
+       });
+
+       //return json;
+
+       /*return {
+         "events":[
+            {
+              "id":1,
+              "start":"Mon Dec 01 2014 02 : 15 : 00 GMT-0500 (EST)",
+              "end":"Mon Dec 01 2014 02 : 45 : 00 GMT-0500 (EST)",
+              "title":"This is the first event"
+            }
+          ]
+        };*/
+
+       //return "{" + jsonObj + "}";
+      // return {"events":[{"id":"1","start":"Mon Dec 01 2014 02 : 15 : 00 GMT-0500 (EST)","end":"Mon Dec 01 2014 02 : 45 : 00 GMT-0500 (EST)","title":"This is the first event"}]};
+
+
+
       //this is where i need to read from the database and return a JSON
+
       /*var year = new Date().getFullYear();
       var month = new Date().getMonth();
       var day = new Date().getDate();*/
 
-      $.getJSON( "getalleventdata.php", function( data ) {
-          console.log('executed');
-      }).done(function( data ) {
-          alert(data);
-          console.log( "JSON Data: " + data.events[ 0 ].title );
-      }).fail(function( jqxhr, textStatus, error ) {
-          var err = textStatus + ", " + error;
-          console.log( "Request Failed: " + err );
-      });
+      //var
 
+      /*$.ajax({
+        dataType: "json",
+        url: 'getalleventdata.php',
+        data: null,
+        type:'POST',
+        success:function(response){
+          return response;
+          /*$calendar.weekCalendar("removeUnsavedEvents");
+          $calendar.weekCalendar("updateEvent", calEvent);
+          $dialogContent.dialog("close");
+        },
+        error:function(error){
+          alert(error);
+        }
+      });*/
 
-      /*return {
+      /*
+      return {
          "events" : [
             {
                "id":1,
@@ -218,7 +256,8 @@ $(document).ready(function() {
             }
 
          ]
-      };*/
+      };
+      */
    }//end function getEventData()
 
 
