@@ -162,23 +162,29 @@ $(document).ready(function() {
 
    function getEventData() {
 
-       jQuery.getJSON('getalleventdata.php', function(data){
-          console.log("succ");
-          jQuery.each( data, function( i, item ){
-            console.log(item.title);
-          });
+
+       $.getJSON('getalleventdata.php', function(data) {
+         var events = Array();
+         //events = data;
+         /* data will hold the php array as a javascript object */
+         $.each(data.events, function(key, val) {
+           console.log(key + " : "+ val.id);
+           console.log(key + " : "+ val.start);
+           console.log(key + " : "+ val.end);
+           console.log(key + " : "+ val.title);
+           console.log(key + " : "+ val.body);
+           console.log(key + " : "+ val.readOnly);
+           //now do the data manipulation.
+           val.start = new Date(parseInt(val.start));
+           val.end = new Date(parseInt(val.end));
+           //console.log(startTime);
+           //console.log(endTime);           
+         });
+         //return JSON.stringify(data);
+         return events;
        });
 
-       return null;
-       /*$.ajax({
-         url: "getalleventdata.php",
-         dataType: "JSON",
-         success: function(json){
-           alert(json);
-           return json;
-         }
-       });*/
-
+       //return events;
        //return json;
        /*
        return {
@@ -200,9 +206,9 @@ $(document).ready(function() {
       //this is where i need to read from the database and return a JSON
 
       */
-      var year = new Date().getFullYear();
+      /*var year = new Date().getFullYear();
       var month = new Date().getMonth();
-      var day = new Date().getDate();
+      var day = new Date().getDate();*/
 
       //var
 
@@ -222,17 +228,17 @@ $(document).ready(function() {
         }
       });*/
 
-
-      /*return {
-         "events" : [
+      /*
+      return {
+        "eventss" : [
             {
-               "id":1,
+               "id":"1",
                "start": new Date(year, month, day, 12),
                "end": new Date(year, month, day, 13, 30),
                "title":"Lunch with Mike"
             },
             {
-               "id":2,
+               "id":"2",
                "start": new Date(year, month, day, 14),
                "end": new Date(year, month, day, 14, 45),
                "title":"Dev Meeting"
