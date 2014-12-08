@@ -168,20 +168,26 @@ $(document).ready(function() {
          //events = data;
          /* data will hold the php array as a javascript object */
          $.each(data.events, function(key, val) {
-           console.log(key + " : "+ val.id);
-           console.log(key + " : "+ val.start);
-           console.log(key + " : "+ val.end);
-           console.log(key + " : "+ val.title);
-           console.log(key + " : "+ val.body);
-           console.log(key + " : "+ val.readOnly);
+           /*console.log(key + " : " + val.id);
+           console.log(key + " : " + val.start);
+           console.log(key + " : " + val.end);
+           console.log(key + " : " + val.title);
+           console.log(key + " : " + val.body);
+           console.log(key + " : " + val.readOnly);
            //now do the data manipulation.
+           */
            val.start = new Date(parseInt(val.start));
            val.end = new Date(parseInt(val.end));
-           //console.log(startTime);
-           //console.log(endTime);           
+           /*
+           console.log(val.start);
+           console.log(val.end);*/
+           //console.log(val);
+           events.push(val);
          });
+
+         console.log(events);
          //return JSON.stringify(data);
-         return events;
+         //return events;
        });
 
        //return events;
