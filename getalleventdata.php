@@ -43,7 +43,7 @@
     $eventCalendarList = null;
     $eventCalendarList = EventCalendar::getAllEventCalendars();
 
-    $events = array();
+    //$events = array();
     $response = array();
 
     while($eventCalendarRow = mysql_fetch_array($eventCalendarList)){
@@ -54,9 +54,10 @@
       $body = $eventCalendarRow['event_description'];
       $readOnly = $eventCalendarRow['read_only'];
 
-      $events[] = array('id'=> $id, 'title'=> $title, 'start'=> $start, 'end'=> $end, 'body'=> $body, 'readOnly'=> $readOnly);
+      $response['cal_events'] = array('id'=> $id, 'title'=> $title, 'start'=> $start, 'end'=> $end, 'body'=> $body, 'readOnly'=> $readOnly);
     }//end while loop
 
-    $response['events'] = $events;
-    echo json_encode($response, JSON_PRETTY_PRINT);
+    //$response['events'] = $events;
+    //var_dump($response);
+    echo json_encode($response);
 ?>

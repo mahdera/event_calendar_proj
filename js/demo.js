@@ -58,11 +58,13 @@ $(document).ready(function() {
                   calEvent.readOnly = false;
                   //here is where the save to database record comes in...
                   //now do call the ajax function to save these values to the database...
-                  var dataString = "start=" + calEvent.start.getTime() +
-                  "&end=" + calEvent.end.getTime() + "&title=" +
+                  var dataString = "start=" + encodeURIComponent(calEvent.start)/*calEvent.start.getTime()*/ +
+                  "&end=" + encodeURIComponent(calEvent.end)/*calEvent.end.getTime()*/ + "&title=" +
                   encodeURIComponent(calEvent.title) + "&body=" +
                   encodeURIComponent(calEvent.body) + "&readOnly=" +
                   encodeURIComponent(calEvent.readOnly);
+
+                  alert(dataString);
 
                   $.ajax({
                       url: 'saveeventcalendar.php',
@@ -161,49 +163,54 @@ $(document).ready(function() {
    }
 
    function getEventData() {
+      var events = Array();
+      var innerArray = Array();
+
 
 
        $.getJSON('getalleventdata.php', function(data) {
-         var events = Array();
+            alert(data);
          //events = data;
          /* data will hold the php array as a javascript object */
-         $.each(data.events, function(key, val) {
-           /*console.log(key + " : " + val.id);
+         //var i = 0;
+         /*$.each(data.events, function(key, val) {
+           console.log(key + " : " + val.id);
            console.log(key + " : " + val.start);
            console.log(key + " : " + val.end);
            console.log(key + " : " + val.title);
            console.log(key + " : " + val.body);
            console.log(key + " : " + val.readOnly);
            //now do the data manipulation.
-           */
-           val.start = new Date(parseInt(val.start));
-           val.end = new Date(parseInt(val.end));
+           //val.start = new Date(parseInt(val.start));
+           //val.end = new Date(parseInt(val.end));
            /*
            console.log(val.start);
            console.log(val.end);*/
            //console.log(val);
-           events.push(val);
-         });
+           //var jsonObj = JSON.parse(JSON.stringify(val));
+           //console.log(jsonObj);
 
-         console.log(events);
+         //});
+
+         //console.log(data.events);
          //return JSON.stringify(data);
-         //return events;
+         //return JSON.stringify(events);
+         return JSON.stringify(data);
        });
 
-       //return events;
        //return json;
-       /*
-       return {
+
+       /*return {
          "events":[
             {
               "id":1,
-              "start":"Tue Dec 02 2014 02 : 15 : 00 GMT-0500 (EST)",
-              "end":"Tue Dec 02 2014 02 : 45 : 00 GMT-0500 (EST)",
+              "start":"Mon Dec 08 2014 02 : 15 : 00 GMT-0500 (EST)",
+              "end":"Mon Dec 08 2014 02 : 45 : 00 GMT-0500 (EST)",
               "title":"This is the first event"
             }
           ]
         };
-
+/*
        //return "{" + jsonObj + "}";
       // return {"events":[{"id":"1","start":"Mon Dec 01 2014 02 : 15 : 00 GMT-0500 (EST)","end":"Mon Dec 01 2014 02 : 45 : 00 GMT-0500 (EST)","title":"This is the first event"}]};
 
@@ -211,8 +218,8 @@ $(document).ready(function() {
 
       //this is where i need to read from the database and return a JSON
 
-      */
-      /*var year = new Date().getFullYear();
+      /*
+      var year = new Date().getFullYear();
       var month = new Date().getMonth();
       var day = new Date().getDate();*/
 
@@ -234,9 +241,9 @@ $(document).ready(function() {
         }
       });*/
 
-      /*
-      return {
-        "eventss" : [
+
+      /*return {
+        "events" : [
             {
                "id":"1",
                "start": new Date(year, month, day, 12),
