@@ -1,8 +1,10 @@
 language: php
+
 php:
   - "5.5"
   - "5.4"
   - "5.3"
-install: php vendor/vendors.php
-composer install
-before_script: phpenv config-add myconfig.ini
+
+before_script: composer install
+
+script: phpunit --configuration tests/phpunit.xml
