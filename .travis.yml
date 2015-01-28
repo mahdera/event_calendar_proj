@@ -3,3 +3,6 @@ php:
   - "5.5"
   - "5.4"
   - "5.3"
+install: php vendor/vendors.php
+composer install
+before_script: phpenv config-add myconfig.ini
