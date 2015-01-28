@@ -1,5 +1,5 @@
 <?php
-  require_once '../classes/Calculator.php';
+  require_once (__DIR__ . '/../classes/Calculator.php');
 
   class CalculatorTest extends PHPUnit_Framework_TestCase{
 
